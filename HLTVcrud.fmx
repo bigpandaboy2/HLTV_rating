@@ -1,0 +1,175 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 358
+  ClientWidth = 838
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object StringGrid1: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 413.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 396.000000000000000000
+    Size.Height = 161.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    RowCount = 1
+    Viewport.Width = 392.000000000000000000
+    Viewport.Height = 120.000000000000000000
+    object BindNavigator2: TBindNavigator
+      Position.X = 240.000000000000000000
+      Position.Y = 120.000000000000000000
+      Size.Width = 241.000000000000000000
+      Size.Height = 25.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      DataSource = BindSourceDB2
+      xRadius = 4.000000000000000000
+      yRadius = 4.000000000000000000
+    end
+  end
+  object StringGrid2: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 176.000000000000000000
+    Position.Y = 8.000000000000000000
+    Size.Width = 201.000000000000000000
+    Size.Height = 161.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 6
+    RowCount = 5
+    Viewport.Width = 197.000000000000000000
+    Viewport.Height = 136.000000000000000000
+  end
+  object BindNavigator1: TBindNavigator
+    Position.X = 496.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 241.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 8
+    DataSource = BindSourceDB1
+    xRadius = 4.000000000000000000
+    yRadius = 4.000000000000000000
+  end
+  object BindNavigator3: TBindNavigator
+    Position.X = 160.000000000000000000
+    Position.Y = 184.000000000000000000
+    Size.Width = 241.000000000000000000
+    Size.Height = 25.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 9
+    DataSource = BindSourceDB2
+    xRadius = 4.000000000000000000
+    yRadius = 4.000000000000000000
+  end
+  object StringGrid3: TStringGrid
+    CanFocus = True
+    ClipChildren = True
+    Position.X = 200.000000000000000000
+    Position.Y = 217.000000000000000000
+    Size.Width = 585.000000000000000000
+    Size.Height = 140.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 13
+    RowCount = 1
+    Viewport.Width = 581.000000000000000000
+    Viewport.Height = 99.000000000000000000
+  end
+  object EmployeeConnection: TFDConnection
+    Params.Strings = (
+      'ConnectionDef=EMPLOYEE')
+    Connected = True
+    LoginPrompt = False
+    Left = 27
+    Top = 216
+  end
+  object Data_playersTable: TFDQuery
+    Active = True
+    Connection = EmployeeConnection
+    SQL.Strings = (
+      'SELECT * FROM DATA_PLAYERS')
+    Left = 35
+    Top = 85
+  end
+  object BindSourceDB1: TBindSourceDB
+    DataSet = Data_playersTable
+    ScopeMappings = <>
+    Left = 32
+    Top = 152
+  end
+  object BindingsList1: TBindingsList
+    Methods = <>
+    OutputConverters = <>
+    Left = 52
+    Top = 29
+    object LinkGridToDataSourceBindSourceDB1: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB1
+      GridControl = StringGrid1
+      Columns = <>
+    end
+    object LinkGridToDataSourceBindSourceDB2: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB2
+      GridControl = StringGrid2
+      Columns = <>
+    end
+    object LinkGridToDataSourceBindSourceDB3: TLinkGridToDataSource
+      Category = 'Quick Bindings'
+      DataSource = BindSourceDB3
+      GridControl = StringGrid3
+      Columns = <>
+    end
+  end
+  object Data_teamsTable: TFDQuery
+    Active = True
+    Connection = EmployeeConnection
+    SQL.Strings = (
+      'SELECT * FROM DATA_TEAMS')
+    Left = 207
+    Top = 401
+  end
+  object BindSourceDB2: TBindSourceDB
+    DataSet = Data_teamsTable
+    ScopeMappings = <>
+    Left = 32
+    Top = 272
+  end
+  object sour: TFDQuery
+    Active = True
+    MasterSource = DataSource1
+    MasterFields = 'TEAM_NAME'
+    Connection = EmployeeConnection
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      'SELECT * FROM DATA_PLAYERS'
+      'WHERE PLAYER_TEAM=:TEAM_NAME')
+    Left = 88
+    Top = 208
+    ParamData = <
+      item
+        Name = 'TEAM_NAME'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+        Value = 'Astralis'
+      end>
+  end
+  object DataSource1: TDataSource
+    DataSet = Data_teamsTable
+    Left = 104
+    Top = 272
+  end
+  object BindSourceDB3: TBindSourceDB
+    DataSet = sour
+    ScopeMappings = <>
+    Left = 104
+    Top = 136
+  end
+end
